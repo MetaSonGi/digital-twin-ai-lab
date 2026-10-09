@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>디지털트윈 AI 랩 — 트렌드 분석 & AI 서비스</title>
+<link rel="stylesheet" href="style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-icon">🏭</span>
+    <div>
+      <h1>디지털트윈 AI 랩</h1>
+      <p>Digital Twin × AI · 최신 트렌드 분석 + 인기 AI 서비스 체험</p>
+    </div>
+  </div>
+  <nav class="tabs">
+    <button class="tab active" data-tab="twin">🏭 3D 디지털트윈</button>
+    <button class="tab" data-tab="trends">📈 트렌드 분석</button>
+    <button class="tab" data-tab="ai">🤖 AI 서비스</button>
+  </nav>
+</header>
+
+<div id="alarmBanner" class="alarm hidden">
+  <span id="alarmText">⚠ AI 이상탐지 — 센서 이상 패턴 감지!</span>
+  <button id="btnClearFaultTop">복구</button>
+</div>
+
+<main>
+  <!-- ============ TAB 1: 3D DIGITAL TWIN ============ -->
+  <section id="tab-twin" class="tabpage active">
+    <div class="layout">
+      <div class="viewport-wrap">
+        <div id="viewport"></div>
+        <div class="viewport-hint">마우스 드래그: 회전 · 휠: 줌 · 우클릭 드래그: 이동</div>
+      </div>
+      <aside class="dashboard">
+        <div class="panel">
+          <h2>시뮬레이션 제어 <span class="clock" id="simTime">00:00:00</span></h2>
+          <div class="btn-row">
+            <button id="btnToggle" class="btn primary">⏸ 일시정지</button>
+            <button id="btnReset" class="btn">↺ 리셋</button>
+          </div>
+          <div class="speed-row">
+            <label for="speedRange">속도 <span id="speedVal">1.0×</span></label>
+            <input type="range" id="speedRange" min="0.25" max="2" step="0.25" value="1" />
+          </div>
+          <div class="btn-row">
+            <button id="btnFault" class="btn danger">🔥 고장 주입</button>
+            <button id="btnClearFault" class="btn">✅ 고장 복구</button>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>🤖 AI 상태 진단</h2>
+          <div class="ai-status" id="aiStatus">
+            <span class="dot ok"></span><span id="aiStatusText">정상 운전 중 — 이상 패턴 없음</span>
+          </div>
+          <div class="metric-grid">
+            <div class="metric"><span class="m-label">모터 온도</span><span class="m-val" id="mTemp">-</span></div>
+            <div class="metric"><span class="m-label">진동</span><span class="m-val" id="mVib">-</span></div>
+            <div class="metric"><span class="m-label">생산량</span><span class="m-val" id="mCount">-</span></div>
+            <div class="metric"><span class="m-label">예상 잔여수명</span><span class="m-val" id="mRul">-</span></div>
+          </div>
+          <canvas id="tempChart" width="360" height="140"></canvas>
+          <p class="note">AI가 온도 시계열을 실시간 z-score 분석으로 감시합니다. 임계값(|z|&gt;3.5) 초과 시 경보.</p>
+        </div>
+        <div class="panel">
+          <h2>📋 AI 이벤트 로그</h2>
+          <ul id="eventLog" class="event-log"></ul>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: TREND ANALYSIS ============ -->
+  <section id="tab-trends" class="tabpage">
+    <div class="trends-wrap">
+      <div class="panel wide">
+        <h2>📈 AI 디지털트윈 시장 전망 <span class="src">시장 리서치 기반 추정치</span></h2>
+        <div class="chart-row">
+          <div class="chart-box">
+            <h3>AI 디지털트윈 시장 (단위: 십억 USD)</h3>
+            <canvas id="chartMarket1" width="520" height="260"></canvas>
+            <p class="note">2025년 약 $31.5B → 2032년 약 $225.4B 전망 (CAGR 약 32.6%)</p>
+          </div>
+          <div class="chart-box">
+            <h3>제조업 디지털트윈 시장 (단위: 십억 USD)</h3>
+            <canvas id="chartMarket2" width="520" height="260"></canvas>
+            <p class="note">2025년 약 $9.5B → 2035년 약 $190B 전망 (CAGR 약 34.9%)</p>
+          </div>
+        </div>
+      </div>
+      <div class="panel wide">
+        <h2>🔥 2025–2026 핵심 트렌드 6</h2>
+        <div id="trendCards" class="card-grid"></div>
+      </div>
+      <div class="panel wide">
+        <h2>🕰 트렌드 타임라인</h2>
+        <div id="timeline" class="timeline"></div>
+      </div>
+      <div class="panel wide">
+        <h2>🛠 개발자 관점: 구현 스택 가이드</h2>
+        <div id="devStack" class="stack-grid"></div>
+        <p class="note">이 웹앱 자체가 위 스택의 축소판입니다 — Three.js(3D) + 시계열 이상탐지 + 규칙 기반 AI 어시스턴트, 전부 브라우저에서 동작.</p>
+      </div>
+      <div class="panel wide">
+        <h2>📚 참고 자료</h2>
+        <ul id="refList" class="ref-list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: AI SERVICES ============ -->
+  <section id="tab-ai" class="tabpage">
+    <div class="trends-wrap">
+      <div class="panel wide">
+        <h2>🔍 사람들이 많이 찾는 AI 서비스</h2>
+        <div id="serviceGrid" class="card-grid"></div>
+      </div>
+      <div class="ai-2col">
+        <div class="panel">
+          <h2>💬 디지털트윈 AI 어시스턴트</h2>
+          <div id="chatLog" class="chat-log"></div>
+          <div class="chat-input-row">
+            <input id="chatInput" type="text" placeholder="예: 예측정비가 뭐야? / 이상탐지 원리 / RUL" maxlength="200" />
+            <button id="btnChat" class="btn primary">전송</button>
+          </div>
+          <div class="chip-row" id="chatChips"></div>
+        </div>
+        <div class="panel">
+          <h2>📝 AI 설비 상태 리포트 생성기</h2>
+          <p class="note">3D 트윈 탭의 실시간 시뮬레이션 데이터를 읽어 AI가 한국어 리포트를 작성합니다.</p>
+          <div class="btn-row">
+            <button id="btnReport" class="btn primary">🤖 리포트 생성</button>
+            <button id="btnCopyReport" class="btn">📋 복사</button>
+          </div>
+          <pre id="reportOut" class="report-out">아직 생성되지 않았습니다. 버튼을 눌러주세요.</pre>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>디지털트윈 AI 랩 · Digital Twin × AI Trend Lab — 모든 처리는 브라우저에서 수행됩니다 · <a href="https://github.com/MetaSonGi/digital-twin-ai-lab" target="_blank" rel="noopener">GitHub 저장소</a></p>
+</footer>
+
+<script src="trends.js"></script>
+<script src="ai.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
