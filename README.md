@@ -1,9 +1,17 @@
-# 디지털트윈 AI 랩 (Digital Twin × AI Trend Lab)
+# 🧠 디지털트윈 AI 랩 | Digital Twin AI Lab
+
+> 3D 트윈 + AI 이상탐지 · 트렌드 분석 · AI 서비스 체험  
+> 3D twin, AI anomaly detection, trend analysis and AI playground
+
+[![Live Demo](https://img.shields.io/badge/demo-live-brightgreen?style=flat-square)](https://metasongi.github.io/digital-twin-ai-lab/) ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=flat-square) ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square) ![Three.js](https://img.shields.io/badge/Three.js-000000?style=flat-square)
+
+🌐 **Live:** https://metasongi.github.io/digital-twin-ai-lab/
+
+---
 
 디지털트윈 AI 논문·현장 노하우·최신 트렌드 분석을 **개발자 관점**으로 정리하고,
 사람들이 많이 찾는 AI 서비스를 **웹에서 바로 체험**할 수 있는 단일 페이지 웹앱입니다.
 
-🌐 **바로 실행:** https://metasongi.github.io/digital-twin-ai-lab/
 
 ## 탭 구성
 
@@ -50,3 +58,9 @@ python3 -m http.server 8000
 | `app.js` | 3D 트윈 + AI 이상탐지 엔진 |
 | `trends.js` | 시장 차트·트렌드 카드·타임라인·스택 가이드 |
 | `ai.js` | AI 서비스 그리드·챗봇·리포트 생성기 |
+
+---
+
+## English Summary
+
+3D twin, AI anomaly detection, trend analysis and AI playground.
